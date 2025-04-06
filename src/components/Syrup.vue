@@ -1,8 +1,16 @@
 <template>
-  <div class="syrup"></div>
+  <div class="syrup" :style="{ backgroundColor: syrupColor }"></div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps({
+  syrupColor: {
+    type: String,
+    required: true,
+  },
+});
+</script>
+
 <style lang="scss" scoped>
 .syrup {
   transform: translateY(400%);

@@ -74,17 +74,17 @@ import { computed } from "vue";
 
 const selectedBaseColor = computed(() => {
   const base = bases.value.find((b) => b.name === currentBase.value);
-  return base.color;
+  return base ? base.color : "transparent";
 });
 
 const selectedCreamerColor = computed(() => {
   const creamer = creamers.value.find((c) => c.name === currentCreamer.value);
-  return creamer.color;
+  return creamer ? creamer.color : "transparent";
 });
 
 const selectedSyrupColor = computed(() => {
   const syrup = syrups.value.find((s) => s.name === currentSyrup.value);
-  return syrup.color;
+  return syrup ? syrup.color : "transparent";
 });
 </script>
 

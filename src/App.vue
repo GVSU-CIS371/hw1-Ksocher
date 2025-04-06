@@ -1,6 +1,11 @@
 <template>
   <div>
-    <Beverage :isIced="currentTemp === 'Cold'" />
+    <Beverage 
+    :isIced="currentTemp === 'Cold'"
+    :baseColor="selectedBaseColor"
+    :creamerColor="selectedCreamerColor"
+    :syrupColor="selectedSyrupColor"
+    />
     <ul>
       <li>
         <template v-for="temp in temps" :key="temp">
@@ -17,7 +22,7 @@
         </template>
       </li>
       <li>
-        <template v-for="base in bases" :key="base">
+        <template v-for="base in bases" :key="base.id">
           <label>
             <input
               type="radio"
@@ -31,7 +36,7 @@
         </template>
       </li>
       <li>
-        <template v-for="cream in creamers" :key="cream">
+        <template v-for="cream in creamers" :key="cream.id">
           <label>
             <input
               type="radio"
@@ -45,7 +50,7 @@
         </template>
       </li>
       <li>
-        <template v-for="syrup in syrups" :key="syrup">
+        <template v-for="syrup in syrups" :key="syrup.id">
           <label>
             <input
               type="radio"
@@ -65,6 +70,22 @@
 <script setup lang="ts">
 import Beverage from "./components/Beverage.vue";
 import { temps, currentTemp, bases, currentBase, creamers, currentCreamer, syrups, currentSyrup } from "./stores/beverage";
+import { computed } from "vue";
+
+const selectedBaseColor = computed(() => {
+  const base = bases.value.find((b) => b.name === currentBase.value);
+  return base.color;
+});
+
+const selectedCreamerColor = computed(() => {
+  const creamer = creamers.value.find((c) => c.name === currentCreamer.value);
+  return creamer.color;
+});
+
+const selectedSyrupColor = computed(() => {
+  const syrup = syrups.value.find((s) => s.name === currentSyrup.value);
+  return syrup.color;
+});
 </script>
 
 <style lang="scss">
